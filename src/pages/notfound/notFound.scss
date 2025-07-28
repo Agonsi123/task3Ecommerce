@@ -1,0 +1,109 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+
+.notfoundContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding: 70px 80px 150px 80px;
+    .roadMap{
+        font-family: $family1;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        color: $primary-color;
+    }
+    .notfoundCont{
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+        .notfoundContent{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .notfoundContent h1{
+            font-size: 110px;
+            font-family: $family2;
+            font-weight: 500;
+            line-height: 115px;
+            letter-spacing: 3.3px;
+            color: $primary-color;
+        }
+        .notfoundContent p{
+            font-family: $family1;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+            color: $primary-color;
+        }
+    }
+}
+
+// Responsiveness for tablet and mobile 
+
+@media (min-width: 700px) and (max-width: 1200px) {
+     .notfoundContainer {
+    padding: 50px 40px 100px 40px;
+    gap: 60px;
+
+    .notfoundCont {
+      gap: 50px;
+
+      .notfoundContent {
+        gap: 24px;
+
+        h1 {
+          font-size: 80px;
+          line-height: 90px;
+        }
+
+        p {
+          font-size: 15px;
+          line-height: 22px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+     .notfoundContainer {
+    padding: 40px 20px 80px 20px;
+    gap: 40px;
+
+    .roadMap {
+      font-size: 13px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    .notfoundCont {
+      gap: 40px;
+
+      .notfoundContent {
+        gap: 20px;
+
+        h1 {
+          font-size: 60px;
+          line-height: 70px;
+          text-align: center;
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 20px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

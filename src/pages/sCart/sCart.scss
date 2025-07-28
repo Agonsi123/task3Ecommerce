@@ -1,0 +1,322 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+
+.scartContainer{
+    padding: 80px 80px 150px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    .roadMap{
+        font-family: $family1;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        color: $primary-color;
+    }
+    .scarttop{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        .scartDetail{
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            color: $primary-color;
+            font-family: $family1;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            
+            .scartProd, .scartProd1{
+                width: 250px;
+            }
+            .scartProd1{
+                text-align: center;
+            }
+            .detailTitle{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                padding: 16px;
+                border-radius: 4px;
+                background-color: $bg-color;
+                box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.05);
+                .scartProduct{
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    width: 250px;
+                }
+                .scartProduct img{
+                    width: 35px;
+                    height: auto;
+                }
+                .scartProd1 button{
+                    padding: 4px;
+                    border: none;
+                    background-color: $bg-color;
+                    color: $secondary2-color;
+                    font-family: $family1;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+            }
+            .detailTitle input{
+                width: 50px;
+                height: 40px;
+                border-radius: 4px;
+                border: 1.5px solid #00000040;
+                outline: none;
+                padding: 0 8px;
+                align-content: center;
+            }
+    
+        }
+        .scartDCont{
+            display: flex;
+            gap: 663px;
+        }
+        .scartDCont button{
+            width: 220px;
+            padding: 16px 0px;
+            border-radius: 4px;
+            border: 1px solid #00000050;
+            font-family: $family1;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            color: $primary-color;
+            background-color: $text1-color;
+            cursor: pointer;
+        }
+    }
+    .scartbottom{
+        display: flex;
+        gap: 152px;
+        .couponContainer{
+            display: flex;
+            gap: 16px;
+            font-family: $family1;
+            font-size: 16px;
+            line-height: 24px;
+            .coupon input{
+                padding: 16px;
+                border-radius: 4px;
+                border: 1px solid $primary-color;
+                outline: none;
+                font-weight: 400;
+                color: $primary-color;
+                width: 250px;
+            }
+            .couponBtn button{
+                font-weight: 500;
+                color: $text1-color;
+                background-color: $secondary2-color;
+                padding: 16px;
+                width: 150px;
+                border-radius: 4px;
+                border: none;
+                cursor: pointer;
+            }
+        }
+        .cartTotal{
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 1.5px solid $primary-color;
+            padding: 20px 12px;
+            width: 470px;
+            .subtotal{
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid #d9d9d9;
+            }
+            .subtotal p{
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 24px;
+            }
+        }.cartTotal p{
+            color: $primary-color;
+            font-family: $family1;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 28px;
+        }
+    }
+}
+
+.cart-items{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.cart-item{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+}
+.cart-item img{
+    width: 45px;
+    height: auto;
+}
+.checkout-btn{
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+}
+/* Tablet: 700px–1200px */
+@media (min-width: 700px) and (max-width: 1200px) {
+    .scartContainer {
+    padding: 60px 40px 100px 40px;
+    gap: 40px;
+
+    .scarttop {
+        gap: 20px;
+
+        .scartProd{
+            width: 150px;
+            text-align: center;
+        }
+      .scartDCont {
+        gap: 100px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        button {
+          width: 180px;
+        }
+      }
+
+      .scartDetail {
+        gap: 20px;
+
+        .detailTitle {
+          gap: 4px;
+          padding: 16px 8px;
+        }
+
+        .scartProduct {
+          width: 100%;
+        }
+        .scartProduct img {
+          width: 50%;
+        }
+      }
+    }
+
+    .scartbottom {
+      flex-direction: column;
+      gap: 40px;
+
+      .couponContainer {
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .coupon input {
+          width: 100%;
+        }
+
+        .couponBtn button {
+          width: 100%;
+        }
+      }
+
+      .cartTotal {
+        width: 96%;
+      }
+    }
+  }
+}
+
+/* Mobile: max-width 700px */
+@media (max-width: 700px) {
+  .scartContainer {
+    padding: 40px 20px 80px 30px;
+    gap: 40px;
+
+    .scarttop {
+      gap: 20px;
+
+      .scartDCont {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+
+        button {
+          width: 100%;
+        }
+      }
+
+      .scartDetail {
+        gap: 24px;
+
+        .detailTitle {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 12px;
+
+          .scartProduct {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .scartbottom {
+      flex-direction: column;
+      gap: 40px;
+
+      .couponContainer {
+        flex-direction: column;
+        gap: 16px;
+
+        .coupon input {
+          width: 90%;
+        }
+        .couponBtn button{
+            width: 100%;
+        }
+      }
+
+      .cartTotal {
+        width: 90%;
+        padding: 16px;
+
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .checkout-btn {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+  }
+}

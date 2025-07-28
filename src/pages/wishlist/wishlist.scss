@@ -1,0 +1,133 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+.wishlistContainer{
+    display:  flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 80px 80px 150px 80px;
+    .wishlistCont{
+        display: flex;
+        gap: 740px;
+    }
+    .wishlistCont p, .wishlistCont1 p{
+        font-family: $family1;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 26px;
+        color: $primary-color;
+        width: 150px;
+    }
+    .wishlistCont button, .wishlistCont1 button{
+        padding: 16px;
+        width: 230px;
+        border: 1px solid #00000050;
+        border-radius: 4px;
+        font-family: $family1;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $primary-color;
+        background-color: $bg-color;
+        cursor: pointer;
+    }
+    .cards{
+        display: flex;
+        gap: 30px;
+        cursor: pointer;
+    }
+    .wishBottom{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        .wishlistCont1{
+            display: flex;
+            gap: 780px;
+            .justYou{
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+        }
+    }
+}
+
+
+/* Tablet: 700px–1200px */
+@media (min-width: 700px) and (max-width: 1200px) {
+  .wishlistContainer {
+    padding: 60px 40px 100px 40px;
+    gap: 40px;
+
+    .wishlistCont,
+    .wishBottom .wishlistCont1 {
+      justify-content: space-between;
+      gap: 40px;
+
+      flex-wrap: wrap;
+
+      p {
+        font-size: 18px;
+      }
+
+      button {
+        width: 200px;
+        padding: 14px;
+      }
+    }
+
+    .cards {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+    }
+  }
+}
+
+/* Mobile: ≤700px */
+@media (max-width: 700px) {
+  .wishlistContainer {
+    padding: 40px 20px 80px 20px;
+    gap: 40px;
+
+    .wishlistCont,
+    .wishBottom .wishlistCont1 {
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+
+      p {
+        font-size: 16px;
+        line-height: 22px;
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+      }
+    }
+
+    .cards {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .wishBottom {
+      gap: 40px;
+
+      .justYou {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  }
+}

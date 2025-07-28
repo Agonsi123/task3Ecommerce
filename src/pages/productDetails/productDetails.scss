@@ -1,0 +1,354 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+.productDetailsContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 70px 80px 150px 80px;
+    gap: 80px;
+    .roadMap{
+        display: flex;
+    }
+    .detailsContainer button{
+        width: 170px;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: $secondary2-color;
+        color: $text1-color;
+        font-family: $family1;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        cursor: pointer;
+    }
+    .detailsCont{
+        display: flex;
+        // align-items: center;
+        gap: 40px;
+        .detailsLeft{
+            display: flex;
+            gap: 20px;
+            .detailsImgLeft{
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                .leftImg1 img{
+                    width: 170px;
+                    height: 130px;
+                }
+            }
+            .detailsImg, .leftImg1{
+                background: $secondary-color;
+            }
+            .detailsImg img{
+                width: 430px;
+                height: 545px;
+            }
+        }
+        .detailsText{
+            display: flex;
+            flex-direction: column;
+            gap: 23px;
+            width: 405px;
+            background-color: $bg-color;
+            .detailsContent{
+                border-bottom: 1px solid $primary-color;
+                padding-bottom: 20px;
+            }
+            .detailsContent p{
+                font-family: $family1;
+                font-weight: 400;
+                font-size: 14px;
+                color: $primary-color;
+                line-height: 21px;
+            }
+            .Btn{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                .sizeBtn{
+                    display: flex;
+                    gap: 10px;
+                    .btnMedium{
+                        background: $secondary2-color;
+                        color: $text2-color;
+                        border: none;
+                        border-radius: 4px;
+                    }
+                }
+                .sizeBtn button{
+                    cursor: pointer;
+                }
+                .plus{
+                    display: flex;
+                    // align-items: center;
+                    .btnMinus{
+                        background: $text2-color;
+                        color: $primary-color;
+                        cursor: pointer;
+                    }
+                    .btnPlus{
+                        background: $secondary2-color;
+                        color: $text2-color;
+                        cursor: pointer;
+                    }
+                }
+                .plus button{
+                    padding: 6.5px;
+                    width: 40px;
+                    border: 1px solid #00000050;
+                    border-radius: 4px;
+                    font-size: larger;
+                    cursor: pointer;
+                }
+                .plus p{
+                    border-top: 1px solid #00000050;
+                    border-bottom: 1px solid #00000050;
+                    padding: 11px 40px;
+                }
+                .buyNowBtn{
+                    width: 170px;
+                    padding: 10px;
+                    border: none;
+                    border-radius: 4px;
+                    background-color: $secondary2-color;
+                    color: $text1-color;
+                    font-family: $family1;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 24px;
+                    cursor: pointer;
+                }
+                .heart{
+                    border: 1px solid #00000050;
+                    padding: 0 4px;
+                    border-radius: 4px;
+                }
+                .heart img{
+                    margin-top: 4px;
+                    cursor: pointer;
+                }
+            }
+            .Btn p{
+                font-family: $family2;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 20px;
+                letter-spacing: 0.6px;
+                color: $primary-color;
+            }
+            .Btn button{
+                padding: 4px;
+                width: 35px;
+            }
+            .delivery{
+                border: 1px solid #00000050;
+                display: flex;
+                flex-direction: column;
+                
+                .contDelivery{
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    padding: 12px 16px;
+                    .deliveryContent{
+                        display: flex;
+                        gap: 8px;
+                        flex-direction: column;
+                        font-family: $family1;
+                        font-weight: 500;
+                        color: $primary-color;
+                    }
+                    .deliveryContent h6{
+                        font-size: 16px;
+                        line-height: 24px;
+                    }
+                    .deliveryContent p{
+                        font-size: 12px;
+                        line-height: 18px;
+                    }
+                    .deliveryContent span{
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+        .detailsText h4{
+            font-family: $family2;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 24px;
+            letter-spacing: 0.72px;
+            color: $primary-color;
+        }
+        .detailsText p{
+            font-family: $family2;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 24px;
+            letter-spacing: 0.72px;
+            color: $primary-color;
+        }
+    }
+    .detailsBottom{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        .cards{
+            display: flex;
+            gap: 30px;
+        }
+    }
+}
+
+/* Tablet View: 700px–1200px */
+@media (min-width: 700px) and (max-width: 1200px) {
+  .productDetailsContainer {
+    margin: 50px 40px 100px 40px;
+    gap: 60px;
+
+    .detailsCont {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+
+      .detailsLeft {
+        flex-direction: row;
+        justify-content: center;
+        .detailsImgLeft {
+          flex-direction: row;
+          gap: 20px;
+          .topLeftImg1, .bottomLeftImg1{
+            display: flex;
+            flex-direction: column;
+            gap: 115px;
+          }
+          .leftImg1 img {
+            width: 140px;
+            height: 100px;
+          }
+        }
+        .detailsImg img {
+          width: 360px;
+          height: auto;
+        }
+      }
+
+      .detailsText {
+        width: 100%;
+        padding: 0 20px;
+        h4,
+        p {
+          font-size: 22px;
+          line-height: 24px;
+        }
+        .Btn {
+          flex-wrap: wrap;
+          gap: 16px;
+          justify-content: flex-start;
+
+          .sizeBtn {
+            flex-wrap: wrap;
+          }
+        }
+      }
+    }
+
+    .detailsBottom .cards {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+    }
+  }
+}
+
+/* Mobile View: ≤700px */
+@media (max-width: 700px) {
+  .productDetailsContainer {
+    margin: 40px 20px 80px 20px;
+    gap: 40px;
+
+    .roadMap {
+      flex-direction: column;
+    }
+
+    .detailsCont {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+
+      .detailsLeft {
+        flex-direction: column;
+        align-items: center;
+
+        .detailsImgLeft {
+          flex-direction: row;
+          gap: 6px;
+          .leftImg1 img {
+            width: 100px;
+            height: 80px;
+          }
+        }
+
+        .detailsImg img {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      .detailsText {
+        width: 100%;
+        padding: 0;
+
+        h4,
+        p {
+          font-size: 18px;
+          line-height: 22px;
+        }
+
+        .Btn {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+
+          .plus {
+            flex-direction: row;
+            align-items: center;
+
+            p {
+              padding: 10px 20px;
+            }
+          }
+
+          .buyNowBtn {
+            width: 100%;
+          }
+          .heart{
+            width: 97%;
+          }
+        }
+
+        .delivery .contDelivery {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+    }
+    .detailsBottom{
+        gap: 0;
+    }
+
+    .detailsBottom .cards {
+      flex-direction: column;
+    }
+  }
+}

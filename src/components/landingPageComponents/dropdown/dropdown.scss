@@ -1,0 +1,86 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+
+.dContain{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 195px;
+    right: 20px;
+    z-index: 10;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-start;
+    // border: 1px solid red;
+    .dropDownContainer{
+        position: relative;
+        top: -50px;
+        right: 95px;
+        width: 224px;
+        // background-color: #00000004;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 6px 20px;
+        color: $text1-color;
+        font-family: $family1;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        
+        .dropDownCont{
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+    }
+}
+
+/* Tablet View (700px–1200px) */
+@media (min-width: 700px) and (max-width: 1200px) {
+  .dContain {
+    top: 130px;
+    right: 10px;
+
+    .dropDownContainer {
+      right: 60px;
+      width: 200px;
+      font-size: 13px;
+      padding: 6px 16px;
+    }
+  }
+}
+
+/* Mobile View (≤700px) */
+@media (max-width: 700px) {
+  .dContain {
+    top: 305px;
+    right: 0;
+    align-items: center;
+
+    .dropDownContainer {
+      right: 0;
+      width: 90%;
+      max-width: 280px;
+      font-size: 13px;
+      padding: 6px 12px;
+      // border-radius: 6px;
+      // box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      text-align: left;
+
+      .dropDownCont {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

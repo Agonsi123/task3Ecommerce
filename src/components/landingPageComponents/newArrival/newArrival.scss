@@ -1,0 +1,110 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+
+.newAContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .newContent{
+        display: flex;
+        gap: 20px;
+        .newLeft img{
+            width: 520px;
+        }
+        .newRight{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .newRightTop img{
+                width: 520px;
+            }
+            .newRightBottom{
+                display: flex;
+                gap: 20px;
+            }
+            .newRightBottom1 img{
+                width: 250px;
+            }
+        }
+    }
+}
+
+// Responsiveness for tablet and mobile 
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    .newAContainer {
+    gap: 30px;
+
+    .newContent {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+
+    .newLeft img {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .newRight {
+        gap: 20px;
+
+        .newRightTop img {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .newRightBottom {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .newRightBottom1 img {
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+    }
+  }
+}
+@media (max-width: 700px) {
+     .newAContainer {
+    gap: 30px;
+
+    .newContent {
+      flex-direction: column;
+      gap: 20px;
+
+      .newLeft img {
+        width: 100%;
+      }
+
+      .newRight {
+        gap: 20px;
+
+        .newRightTop img {
+          width: 100%;
+        }
+
+        .newRightBottom {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .newRightBottom1 img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+}
+

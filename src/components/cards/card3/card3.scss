@@ -1,0 +1,49 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+
+.card3Container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .img img{
+        width: 245px;
+        height: 220px;
+    }
+    .cardsContent{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .price{
+            display: flex;
+            gap: 8px;
+            .num{
+                color: $primary-color;
+                font-size: 14px;
+                line-height: 21px;
+                font-weight: 600;
+                font-family: $family1;
+            }
+        }
+        .price p{
+            font-family: $family1;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 500;
+            color: $secondary2-color;
+        }
+    }
+    .cardsContent h6{
+        font-family: $family1;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $primary-color;
+    }
+}

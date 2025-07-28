@@ -1,0 +1,59 @@
+$primary-color: #000000;
+$bg-color: #ffffff;
+$secondary-color: #f5f5f5;
+$secondary2-color: #db4444;
+$text1-color: #fafafa;
+$text2-color: #ffffff;
+$family1: "Poppins";
+$family2: "Inter";
+
+
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .img img{
+        width: 245px;
+        height: 220px;
+    }
+    .cardContent{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .cardPrice{
+            display: flex;
+            gap: 12px;
+            font-family: "Poppins";
+            font-weight: 500;
+            font-style: medium;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .cardDiscount{
+            color: $secondary2-color;
+        }
+        .cardPrice strike{
+            color: $primary-color;
+        }
+        .cardRating{
+            display: flex;
+            gap: 8px;
+        }
+    }
+    .cardContent h6{
+        font-family: "Poppins";
+        font-weight: 500;
+        font-style: medium;
+        font-size: 16px;
+        line-height: 24px;
+        color: $primary-color;
+    }
+}
+
+// Responsiveness for tablet and mobile 
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    
+}
+
+@media (max-width: 700px) {}

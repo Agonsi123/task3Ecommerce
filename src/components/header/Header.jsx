@@ -230,9 +230,11 @@ export const Cart = ({ heart, heart2, cart, cart2, user, user2 }) => {
       </Link>
       <div className="cartIcons">{cart2}</div>
       {isAuth ? (
-        <div className="cartIcons" onClick={() => dispatch(toggleModal())}>
-          {user}
-        </div>
+        <Link>
+          <div className="cartIcons" onClick={() => dispatch(toggleModal())}>
+            {user}
+          </div>
+        </Link>
       ) : (
         <Link to="/signin">
           <div className="cartIcons">{user2}</div>

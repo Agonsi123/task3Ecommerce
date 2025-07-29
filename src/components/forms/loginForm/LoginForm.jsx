@@ -68,7 +68,7 @@ const LoginForm = () => {
           const user = auth.currentUser;
           dispatch(login({name: user.displayName || '', identifier: user.email}));
           console.log("Signed in successfully with email:", data.identifier);
-          alert(`Welcome back, ${data.identifier}!`);
+          alert(`Welcome back, ${data.name}!`);
 
           navigate("/account");
           //after successful sign in reset entire form
@@ -135,10 +135,6 @@ const LoginForm = () => {
     }
     setLoading(false);
     
-
-    // setIsLoggedIn(true);
-    // navigate("/account");
-    // reset();
   };
 
   const handleGoogleSignIn = async () => {

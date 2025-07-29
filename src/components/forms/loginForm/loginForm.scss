@@ -82,12 +82,12 @@ $family2: "Inter";
 /* Tablet: 700px–1200px */
 @media (min-width: 700px) and (max-width: 1200px) {
   .loginFormContainer {
-    align-items: center;
+    // align-items: center;
 
     .signupContent h3 {
         font-size: 28px;
         line-height: 32px;
-        text-align: center;
+        // text-align: center;
     }
     .formWrapper {
       .formField input {

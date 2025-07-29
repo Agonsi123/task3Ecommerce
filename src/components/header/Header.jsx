@@ -1,6 +1,6 @@
 import React from "react";
 import "./header.scss";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import search from "../../assets/images/search.svg";
 import heart1 from "../../assets/images/heart1.svg";
 import heart2 from "../../assets/images/heart2.svg";
@@ -19,9 +19,16 @@ import { HiOutlineX, HiOutlineMenu } from "react-icons/hi";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
   const location = useLocation();
   const {isAuth, user} = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
 
   return (
     <div className="headerContainer">
@@ -62,7 +69,7 @@ const Header = () => {
             <>
               <div className="welcome">
                 <p className="welcomeText">Hi, {user.name || user.identifier}</p>
-                <button className="logoutBtn" onClick={() => dispatch(logout())}>
+                <button className="logoutBtn" onClick={handleLogout}>
                   Logout
                 </button>
               </div>

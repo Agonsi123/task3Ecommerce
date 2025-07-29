@@ -68,7 +68,7 @@ const LoginForm = () => {
           const user = auth.currentUser;
           dispatch(login({name: user.name || '', identifier: user.email}));
           console.log("Signed in successfully with email:", data.identifier);
-          alert(`Welcome back, ${data.name}!`);
+          alert(`Welcome back, ${data.identifier}!`);
 
           navigate("/account");
           //after successful sign in reset entire form

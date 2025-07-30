@@ -8,6 +8,7 @@ import { createUserWithEmailAndPassword, signInWithPhoneNumber, updateProfile, G
 import { Navigate } from 'react-router-dom';
 import Google from "../../../assets/images/Google.svg";
 import { useDispatch } from 'react-redux';
+import { signup } from '../../../store/authSlice';
 import { setActiveForm } from '../../../store/formSlice';
 
 
@@ -76,6 +77,14 @@ const RegForm = () => {
 
               console.log('Signed up successfully with email:', data.identifier);
               alert(`Welcome, ${data.name}! Your account is created`);
+
+              dispatch(signup({
+                uid: user.uid,
+                name: data.name,
+                email: user.email,
+                method: "email"
+              }));
+
               reset();
               setStep(1);
               setInputType('unknown');
@@ -121,7 +130,6 @@ const RegForm = () => {
           try {
             const userCredential = await confirmationResult.confirm(data.otp);
             const user = userCredential.user;
-
             if (data.name) {
               await updateProfile(user, {
                 name: data.name,
@@ -130,6 +138,14 @@ const RegForm = () => {
             }
 
             console.log("Phone number verified and user signed up!");
+
+            dispatch(signup({
+              uid: user.uid,
+              name: data.name,
+              phone: user.phone,
+              method: "phone"
+            }));
+
             alert(`Successfully signed up with ${data.name} || ${data.identifier}!`);
 
             // Reset form state after successful signup
@@ -162,6 +178,13 @@ const RegForm = () => {
         const result = await signInWithPopup(auth, provider);
         console.log("Signed up with Google:", result.user);
         alert("Welcome, " + result.user.name);
+
+        dispatch(signup({
+          uid: result.user.uid,
+          name: result.user.name,
+          phone: result.user.email,
+          method: "google"
+        }));
         // Reset form
         reset();
         setStep(1);

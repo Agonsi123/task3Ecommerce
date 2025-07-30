@@ -66,7 +66,7 @@ const LoginForm = () => {
         try {
           await signInWithEmailAndPassword(auth, data.identifier, data.password);
           const user = auth.currentUser;
-          dispatch(login({name: user.name || '', identifier: user.email}));
+          dispatch(login({name: user.name, identifier: user.email}));
           console.log("Signed in successfully with email:", data.identifier);
           alert(`Welcome back, ${data.identifier}!`);
 
@@ -113,7 +113,7 @@ const LoginForm = () => {
       try {
         await confirmationResult.confirm(data.otp);
         const user = auth.currentUser;
-        dispatch(login({name: user.name || '', identifier: user.phoneNumber}));
+        dispatch(login({name: user.name, identifier: user.phoneNumber}));
         
         navigate("/account");
         console.log("Phone number verified and user signed in!");
@@ -144,7 +144,7 @@ const LoginForm = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      dispatch(login({name: user.name || '', identifier: user.email}));
+      dispatch(login({name: user.name, identifier: user.email}));
       
       console.log('Signed in with Google:', result.user);
 

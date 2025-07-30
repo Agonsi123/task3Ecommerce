@@ -22,7 +22,8 @@ const Header = () => {
   const navigate = useNavigate();
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
   const location = useLocation();
-  const {isAuth, user} = useSelector((state) => state.auth);
+  // const {isAuth, user} = useSelector((state) => state.auth);
+  const {isLoggedIn, user} = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -65,7 +66,7 @@ const Header = () => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/about">About</NavLink>
-          {isAuth ? (
+          {isLoggedIn ? (
             <>
               <div className="welcome">
                 <p className="welcomeText">Hi, {user.name || user.identifier}</p>

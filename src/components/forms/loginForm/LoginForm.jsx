@@ -113,7 +113,7 @@ const LoginForm = () => {
       try {
         await confirmationResult.confirm(data.otp);
         const user = auth.currentUser;
-        dispatch(login({name: user.name, identifier: user.phoneNumber}));
+        dispatch(login({name: user.displayName, identifier: user.phoneNumber}));
         
         navigate("/account");
         console.log("Phone number verified and user signed in!");
@@ -144,12 +144,12 @@ const LoginForm = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      dispatch(login({name: user.name, identifier: user.email}));
+      dispatch(login({name: user.displayName, identifier: user.email}));
       
       console.log('Signed in with Google:', result.user);
 
       navigate("/account");
-      alert("Welcome, " + (result.user.name || result.user.identifier));
+      alert("Welcome, " + (result.user.displayName || result.user.identifier));
       // Reset form
       reset();
       setStep(1);

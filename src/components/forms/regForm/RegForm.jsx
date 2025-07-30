@@ -142,7 +142,7 @@ const RegForm = () => {
             dispatch(signup({
               uid: user.uid,
               name: data.DisplayName,
-              phone: user.phone,
+              phone: user.phoneNumber,
               method: "phone"
             }));
 

@@ -25,7 +25,7 @@ const RegForm = () => {
     } = useForm();
 
     const identifier = watch('identifier');
-    const name = watch('name');
+    const name = watch("displayName");
     const [step, setStep] = useState(1);
     const [confirmationResult, setConfirmationResult] = useState(null);
     const [firebaseError, setFirebaseError] = useState(null);
@@ -68,19 +68,19 @@ const RegForm = () => {
               const userCredential = await createUserWithEmailAndPassword(auth, data.identifier, data.password);
               const user = userCredential.user;
 
-              if (data.name) {
+              if (data.displayName) {
                 await updateProfile(user, {
-                  name: data.name
+                  displayName: data.displayName
                 });
-                console.log("User name updated:", data.name);
+                console.log("User name updated:", data.displayName);
               }
 
               console.log('Signed up successfully with email:', data.identifier);
-              alert(`Welcome, ${data.name}! Your account is created`);
+              alert(`Welcome, ${data.displayName}! Your account is created`);
 
               dispatch(signup({
                 uid: user.uid,
-                name: data.name,
+                name: data.displayName,
                 email: user.email,
                 method: "email"
               }));
@@ -130,23 +130,23 @@ const RegForm = () => {
           try {
             const userCredential = await confirmationResult.confirm(data.otp);
             const user = userCredential.user;
-            if (data.name) {
+            if (data.displayName) {
               await updateProfile(user, {
-                name: data.name,
+                name: data.displayName,
               });
-              console.log("User name updated for phone user:", data.name);
+              console.log("User name updated for phone user:", data.DisplayName);
             }
 
             console.log("Phone number verified and user signed up!");
 
             dispatch(signup({
               uid: user.uid,
-              name: data.name,
+              name: data.DisplayName,
               phone: user.phone,
               method: "phone"
             }));
 
-            alert(`Successfully signed up with ${data.name} || ${data.identifier}!`);
+            alert(`Successfully signed up with ${data.diplayName} || ${data.identifier}!`);
 
             // Reset form state after successful signup
             reset();
@@ -154,7 +154,7 @@ const RegForm = () => {
             setValue("identifier", "");
             setValue("password", "");
             // setValue('otp', '');
-            setValue("name", "");
+            setValue("displayName", "");
             setConfirmationResult(null);
             setInputType("unknown");
 
@@ -176,15 +176,18 @@ const RegForm = () => {
       const provider = new GoogleAuthProvider();
       try {
         const result = await signInWithPopup(auth, provider);
-        console.log("Signed up with Google:", result.user);
-        alert("Welcome, " + result.user.name);
+        const user = result.user;
+
+        console.log("Signed up with Google:", user);
+        alert("Welcome, " + user.displayName);
 
         dispatch(signup({
-          uid: result.user.uid,
-          name: result.user.name,
-          phone: result.user.email,
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
           method: "google"
         }));
+
         // Reset form
         reset();
         setStep(1);
@@ -315,9 +318,13 @@ const RegForm = () => {
         {currentError && <p style={{ color: "red", fontSize: "12px" }}>{currentError}</p>}
 
         <div className="formContainer">
-          <div className="googleSignup" onClick={handleGoogleSignIn}>
+          <div
+            className="googleSignup"
+            onClick={handleGoogleSignIn}
+            style={{ opacity: loading ? 0.6 : 1, pointerEvents: loading ? "none" : "auto" }}
+          >
             <img src={Google} alt="" />
-            <span>Sign up with Google</span>
+            <span>{loading ? "Processing..." : "Sign up with Google"}</span>
           </div>
         </div>
       </form>
@@ -330,8 +337,7 @@ const RegForm = () => {
       </div> */}
       <div className="login">
         <p>Already have account</p>
-        <button onClick={() => dispatch(setActiveForm("login")
-        )}>Log in</button>
+        <button onClick={() => dispatch(setActiveForm("login"))}>Log in</button>
       </div>
     </div>
   );

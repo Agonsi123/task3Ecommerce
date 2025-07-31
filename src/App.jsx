@@ -15,7 +15,10 @@ import SCart from "./pages/sCart/SCart";
 import NotFound from "./pages/notfound/NotFound";
 import ProductDetails from "./pages/productDetails/ProductDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
-// import Card from "./components/cards/card1/Card";
+
+
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +45,6 @@ function App() {
 
   return (
     <>
-    {/* <Card/> */}
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />

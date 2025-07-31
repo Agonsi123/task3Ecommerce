@@ -12,9 +12,51 @@ $family2: "Inter";
     display: flex;
     flex-direction: column;
     gap: 16px;
-    .img img{
-        width: 245px;
-        height: 220px;
+    .topcardContainer{
+        background-color: $secondary-color;
+        .topCard{
+            padding: 16px;
+        }
+        .topRight{
+            display: flex;
+            justify-content: space-between;
+            .eye{
+                cursor: pointer;
+            }
+        }
+        .topRight p{
+            background-color: $secondary2-color;
+            height: 20px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: $family1;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            color: $text1-color;
+        }
+        
+        .img img{
+            width: 190px;
+            height: 200px;
+            margin-top: -60px;
+            margin-left: 16px;
+        }
+        .bottomCard{
+            width: 20%;
+            padding: 8px 12px;
+            position: absolute;
+            right: 6.4%;
+            top: 148%;
+            font-weight: 500;
+            font-family: $family1;
+            font-size: 16px;
+            line-height: 24px;
+            color: $text2-color;
+            background-color: $primary-color;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
     }
     .cardContent{
         display: flex;

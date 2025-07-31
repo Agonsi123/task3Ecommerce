@@ -21,10 +21,12 @@ const productSlice = createSlice({
     reducers: {
         setSelectedProduct: (state, action) => {
             // Save only serializable data
-            const {image, color, star, ...rest} = action.payload;
+            const {eye, heart, image, color, star, ...rest} = action.payload;
 
             const serializablePayload = {
                 ...rest,
+                eye: typeof eye === "string" ? eye : "",
+                heart: typeof heart === "string" ? heart : "",
                 image: typeof image === "string" ? image : "",
                 color: typeof color === "string" ? color : "",
                 star: typeof star === "string" ? star : "",

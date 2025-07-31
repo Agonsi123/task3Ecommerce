@@ -12,6 +12,8 @@ import hp1 from "../../../assets/images/hp1.svg";
 import hp2 from "../../../assets/images/hp2.svg";
 import hp3 from "../../../assets/images/hp3.svg";
 import hp4 from "../../../assets/images/hp4.svg";
+import fillEye from "../../../assets/images/fillEye.svg";
+import fillHeart from "../../../assets/images/fillHeart.svg";
 import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../../store/productSlice";
 // import { addToCart } from "../../../store/inventorySlice";
@@ -21,6 +23,9 @@ import { useNavigate } from "react-router-dom";
 const productList = [
   {
     id: 1,
+    text: "-40%",
+    eye: fillEye,
+    heart: fillHeart,
     image: hp1,
     title: "HAVIT HV-G92 Gamepad",
     newPrice: "$120",
@@ -30,19 +35,12 @@ const productList = [
     description:
       "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
   },
-  {
-    id: 2,
-    image: hp2,
-    title: "AK-900 Wired Keyboard",
-    newPrice: "$960",
-    oldPrice: "$1160",
-    star: FourStar,
-    num: "(75)",
-    description:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis exercitationem recusandae dicta praesentium omnis? Fugit at hic debitis ipsum eius velit numquam omnis.",
-  },
+ 
   {
     id: 3,
+    text: "-30%",
+    eye: fillEye,
+    heart: fillHeart,
     image: hp3,
     title: "IPS LCD Gaming Monitor",
     newPrice: "$370",
@@ -54,6 +52,9 @@ const productList = [
   },
   {
     id: 4,
+    text: "-25%",
+    eye: fillEye,
+    heart: fillHeart,
     image: hp4,
     title: "S-Series Comfort Chair",
     newPrice: "$375",
@@ -62,6 +63,24 @@ const productList = [
     num: "(99)",
     description:
       "PLorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis exercitationem recusandae dicta praesentium omnis? Fugit at hic debitis ipsum eius velit numquam omnis.",
+  },
+];
+
+const productListB = [
+  {
+    id: 2,
+    text: "-35%",
+    eye: fillEye,
+    heart: fillHeart,
+    image: hp2,
+    title: "AK-900 Wired Keyboard",
+    newPrice: "$960",
+    oldPrice: "$1160",
+    star: FourStar,
+    num: "(75)",
+    btn: "",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis exercitationem recusandae dicta praesentium omnis? Fugit at hic debitis ipsum eius velit numquam omnis.",
   },
 ];
 
@@ -91,16 +110,37 @@ const Sales = () => {
           img3
         />
         <div className="cards">
-
           {productList.map((product) => (
-            <div key={product.id} onClick={() => handleClick(product)}>
+            <div key={product.id} >
               <Card
+                text={product.text}
+                eye={<img src={product.eye} alt="eye Icon" />}
+                heart={<img src={product.heart} alt="heart Icon" />}
                 image={<img src={product.image} alt={product.title} />}
                 title={product.title}
                 newPrice={product.newPrice}
                 oldPrice={product.oldPrice}
                 star={<img src={product.star} alt="ratings" />}
                 num={product.num}
+                onEyeClick={() => handleClick(product)}
+              />
+            </div>
+          ))}
+
+          {productListB.map((product) => (
+            <div key={product.id}>
+              <Card
+                text={product.text}
+                eye={<img src={product.eye} alt="eye Icon" />}
+                heart={<img src={product.heart} alt="heart Icon" />}
+                image={<img src={product.image} alt={product.title} />}
+                title={product.title}
+                newPrice={product.newPrice}
+                oldPrice={product.oldPrice}
+                star={<img src={product.star} alt="ratings" />}
+                num={product.num}
+                btn={product.btn}
+                onEyeClick={() => handleClick(product)}
               />
             </div>
           ))}

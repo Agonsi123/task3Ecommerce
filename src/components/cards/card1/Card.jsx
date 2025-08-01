@@ -6,8 +6,10 @@ import './card.scss';
 
 const Card = ({
   text,
+  texT,
   eye,
   heart,
+  trash,
   image,
   title,
   newPrice,
@@ -17,17 +19,17 @@ const Card = ({
   btn,
   description,
   onEyeClick,
+  onButtonClick
 }) => {
 
   
   return (
     <div className="cardContainer">
       <div className="topcardContainer">
-        
-
         {text && eye && heart ? (
           <div className="topRight">
-            <p>{text}</p>
+            {text ? <p>{text}</p> : <p className="texT">{texT}</p>}
+
             <div className="img">{image}</div>
             <div className="topIcons">
               <div>{heart}</div>
@@ -38,18 +40,25 @@ const Card = ({
           </div>
         ) : (
           <div className="topRight">
+            {text ? <p>{text}</p> : <p className="texT">{texT}</p>}
             <div className="img">{image}</div>
             <div className="topIcons">
               <div>{heart}</div>
               <div className="eye" onClick={onEyeClick}>
                 {eye}
               </div>
+              <div>{trash}</div>
             </div>
           </div>
         )}
 
-        {btn ? <button className="bottomCard">{btn}</button> : ""}
-        {/* <button className="bottomCard">Add To Cart</button> */}
+        {btn ? (
+          <button className="bottomCard" onClick={onButtonClick}>
+            {btn}
+          </button>
+        ) : (
+          ""
+        )}
       </div>
       <div className="cardContent">
         <h6>{title}</h6>

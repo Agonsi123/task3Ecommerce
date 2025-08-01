@@ -52,6 +52,7 @@ const productList = [
     price: "$360",
     star: FourStar,
     num: "(55)",
+    btn: "Add To Cart",
     description:
       "Comes in various sizes and styles, with features like secure zipper closure, top handles, and adjustable shoulder straps.",
   },
@@ -169,6 +170,7 @@ const ExploreProducts = () => {
               price={product.price}
               star={<img src={product.star} alt="ratings" />}
               num={product.num}
+              btn={product.btn}
               onEyeClick={() => handleClick(product)}
             />
           </div>

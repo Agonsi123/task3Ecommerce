@@ -1,10 +1,11 @@
 import React from 'react';
 import './card3.scss';
 
-const Card3 = ({ text, eye, heart, image, title, price, star, num, color, description, onEyeClick }) => {
+const Card3 = ({ text, eye, heart, image, title, price, star, num, color, btn, description, onEyeClick }) => {
   return (
     <div className="card3Container">
-        {text && eye && heart ? (
+       <div className="topCard">
+         {text && eye && heart ? (
             <div className="cardsimage">
                 <p>{text}</p>
                 <div className="img">{image}</div>
@@ -27,6 +28,8 @@ const Card3 = ({ text, eye, heart, image, title, price, star, num, color, descri
                 </div>
             </div>
         )}
+        {btn ? <button className="bottomCard">{btn}</button> : ""}
+       </div>
       
       <div className="cardsContent">
         <h6>{title}</h6>

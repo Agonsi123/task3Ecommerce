@@ -33,6 +33,9 @@ $family2: "Inter";
     .cards{
         grid-template-columns: 1fr;
         justify-content: center;
-        // gap: 0;
+        align-items: center;
+        width: 100%;
+        margin: 0 -20px;
+
     }
 }

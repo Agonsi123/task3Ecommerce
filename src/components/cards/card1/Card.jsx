@@ -28,8 +28,8 @@ const Card = ({
       <div className="topcardContainer">
         {text && eye && heart ? (
           <div className="topRight">
-            {text ? <p>{text}</p> : <p className="texT">{texT}</p>}
-
+            {text && <p>{text}</p>}
+            {texT && <p className="texT">{texT}</p>}
             <div className="img">{image}</div>
             <div className="topIcons">
               <div>{heart}</div>
@@ -40,7 +40,8 @@ const Card = ({
           </div>
         ) : (
           <div className="topRight">
-            {text ? <p>{text}</p> : <p className="texT">{texT}</p>}
+            {text && <p>{text}</p>}
+            {texT && <p className="texT">{texT}</p>}
             <div className="img">{image}</div>
             <div className="topIcons">
               <div>{heart}</div>

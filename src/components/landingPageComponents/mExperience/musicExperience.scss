@@ -65,6 +65,7 @@ $hover2-button: #a0bce0;
 @media (min-width: 700px) and (max-width: 1200px) {
     .mExpContainer{
         flex-direction: column;
+        margin: 0 20px;
     }
 }
 
@@ -73,7 +74,8 @@ $hover2-button: #a0bce0;
         flex-direction: column;
         align-items: flex-start;
         padding: 30px 20px;
-        margin-right: 0;
+        margin-right: -20px;
+        margin-left: -20px;
 
     .mExpLeft {
         gap: 20px;

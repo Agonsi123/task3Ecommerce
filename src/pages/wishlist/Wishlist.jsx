@@ -176,7 +176,7 @@ const Wishlist = () => {
           </div>
           <button onClick={() => navigate("")}>See All</button>
         </div>
-        <div className="cards">
+        <div className="cards2">
           {lowerWishItems.map((card) => (
             <div key={card.id}>
               <Card

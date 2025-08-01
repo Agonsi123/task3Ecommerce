@@ -8,14 +8,12 @@ import cart1 from "../../assets/images/cart1.svg";
 import cart2 from "../../assets/images/cart2.svg";
 import userRed from "../../assets/images/userRed.svg";
 import user from "../../assets/images/user.svg";
-import {logout} from '../../store/authSlice';
+import { logout } from "../../store/authSlice";
 import { toggleModal } from "../../store/modalSlice";
 import { toggleMenu, closeMenu } from "../../store/menuSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Dropdown from "../landingPageComponents/dropdown/Dropdown";
 import { HiOutlineX, HiOutlineMenu } from "react-icons/hi";
-
-
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -23,13 +21,12 @@ const Header = () => {
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
   const location = useLocation();
   // const {isAuth, user} = useSelector((state) => state.auth);
-  const {isLoggedIn, user} = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
   };
-
 
   return (
     <div className="headerContainer">
@@ -69,7 +66,7 @@ const Header = () => {
           {isLoggedIn ? (
             <>
               <div className="welcome">
-                <p className="welcomeText">Hi, {user.name || user.identifier}</p>
+                <p className="welcomeText">Hi, {user.displayName || user.identifier}</p>
                 <button className="logoutBtn" onClick={handleLogout}>
                   Logout
                 </button>
@@ -90,10 +87,6 @@ const Header = () => {
             {location.pathname === "/" && (
               <Cart
                 heart={<img src={heart1} alt="icons" />}
-                // cart2={<img src={cart2} alt="icons" />}
-                // heart2={<img src={heart2} alt="icons" />}
-                // user={<img src={userRed} alt="icons" />}
-                // user2={<img src={user} alt="icons" />}
                 cart={<img src={cart1} alt="icons" />}
               />
             )}
@@ -101,10 +94,7 @@ const Header = () => {
               <Cart
                 heart={<img src={heart1} alt="icons" />}
                 cart2={<img src={cart2} alt="icons" />}
-                // heart2={<img src={heart2} alt="icons" />}
                 user={<img src={userRed} alt="icons" />}
-                // cart={<img src={cart1} alt="icons" />}
-                // user2={<img src={user} alt="icons" />}
               />
             )}
             {location.pathname === "/wishlist" && (
@@ -112,19 +102,13 @@ const Header = () => {
                 heart2={<img src={heart2} alt="icons" />}
                 cart={<img src={cart1} alt="icons" />}
                 user2={<img src={user} alt="user" />}
-                // heart={<img src={heart1} alt="icons" />}
-                // cart2={<img src={cart2} alt="icons" />}
-                // user={<img src={userRed} alt="icons" />}
               />
             )}
             {location.pathname === "/scart" && (
               <Cart
-                // heart={<img src={heart1} alt="icons" />}
                 cart2={<img src={cart2} alt="icons" />}
                 heart2={<img src={heart2} alt="icons" />}
                 user2={<img src={user} alt="user" />}
-                // user={<img src={userRed} alt="icons" />}
-                // cart={<img src={cart1} alt="icons" />}
               />
             )}
             {location.pathname === "/contact" && (
@@ -132,9 +116,6 @@ const Header = () => {
                 heart={<img src={heart1} alt="icons" />}
                 cart={<img src={cart1} alt="icons" />}
                 user2={<img src={user} alt="user" />}
-                // cart2={<img src={cart2} alt="icons" />}
-                // heart2={<img src={heart2} alt="icons" />}
-                // user={<img src={userRed} alt="icons" />}
               />
             )}
             {location.pathname === "/about" && (
@@ -142,9 +123,6 @@ const Header = () => {
                 heart={<img src={heart1} alt="icons" />}
                 cart={<img src={cart1} alt="icons" />}
                 user2={<img src={user} alt="user" />}
-                // cart2={<img src={cart2} alt="icons" />}
-                // heart2={<img src={heart2} alt="icons" />}
-                // user={<img src={userRed} alt="icons" />}
               />
             )}
             {location.pathname === "/product/:id" && (
@@ -152,30 +130,12 @@ const Header = () => {
                 heart={<img src={heart1} alt="icons" />}
                 user2={<img src={user} alt="user" />}
                 cart={<img src={cart1} alt="icons" />}
-                // cart2={<img src={cart2} alt="icons" />}
-                // heart2={<img src={heart2} alt="icons" />}
-                // user={<img src={userRed} alt="icons" />}
               />
             )}
           </div>
         </div>
 
         {/* Mobile Menu */}
-
-        {/* <div className={`mobileSlideMenu ${isMenuOpen ? "open" : ""}`}>
-          <NavLink to="/" onClick={() => dispatch(closeMenu())}>
-            Home
-          </NavLink>
-          <NavLink to="/contact" onClick={() => dispatch(closeMenu())}>
-            Contact
-          </NavLink>
-          <NavLink to="/about" onClick={() => dispatch(closeMenu())}>
-            About
-          </NavLink>
-          <NavLink to="/signup" onClick={() => dispatch(closeMenu())}>
-            Sign Up
-          </NavLink>
-        </div> */}
 
         {isMenuOpen && (
           <div className="mobileMenu">
@@ -190,7 +150,7 @@ const Header = () => {
             </NavLink>
             {isLoggedIn ? (
               <>
-                <span className="welcomeText">Hello, {user.name}</span>
+                <span className="welcomeText">Hello, {user.displayName || user.identifier}</span>
                 <span
                   className="logoutBtn"
                   onClick={() => {

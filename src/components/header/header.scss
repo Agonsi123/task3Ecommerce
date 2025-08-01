@@ -51,7 +51,6 @@ $family2: "Inter";
     .bottomHeader{
         padding: 0 80px;
         display: flex;
-        // align-items: center;
         gap: 100px;
         background-color: $bg-color;
         .logo a{
@@ -60,7 +59,6 @@ $family2: "Inter";
             color: $primary-color;
             text-decoration: none;
             font-size: 36px;
-            // line-height: 24px;
             letter-spacing: 0.72px;
         }
         .navItems{
@@ -165,8 +163,8 @@ $family2: "Inter";
 .mobileMenuIcon{
     display: none;
     z-index: 40;
-    margin-top: -52px;
-    margin-right: -4px;
+    margin-top: -58px;
+    margin-right: 20px;
 }
 .mobileMenu{
     display: none;
@@ -249,6 +247,37 @@ $family2: "Inter";
 }
 
 @media (max-width: 700px) {
+    .headerContainer {
+        gap: 12px;
+        width: 100%;
+    .topHeader {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+        width: 100%;
+        background-color: $secondary2-color;
+        .topHeaderLeft{
+            gap: 30px;
+            font-size: 15px;
+        }
+        .topHeaderRight select{
+            background-color:$secondary2-color;
+            border-color:$secondary2-color;
+            font-size: 12px;
+            line-height: 20px;
+        }
+    }
+
+    .bottomHeader {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 24px;
+        padding: 0 8px;
+        width: 100%;
+
+    .logo {
+        width: 100%;
+    }
     .mobileMenuIcon{
         display: flex;
         position: relative;
@@ -256,7 +285,7 @@ $family2: "Inter";
     .mobileMenu{
         display: flex;
         position: absolute;
-        top: 170px;
+        top: 160px;
         right: 0;
         width: 20%;
         display: flex;
@@ -281,37 +310,6 @@ $family2: "Inter";
         font-weight: 700;
     }
 
-    .headerContainer {
-        gap: 12px;
-        width: 100%;
-    .topHeader {
-        flex-direction: column;
-        gap: 12px;
-        padding: 8px 12px;
-        width: 100%;
-        background-color: $secondary2-color;
-        .topHeaderLeft{
-            gap: 60px;
-            font-size: 15px;
-        }
-        .topHeaderRight select{
-            background-color:$secondary2-color;
-            border-color:$secondary2-color;
-            font-size: 12px;
-            line-height: 20px;
-        }
-    }
-
-    .bottomHeader {
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 24px;
-        padding: 0 16px;
-
-    .logo {
-        width: 100%;
-    }
-
     .navItems {
         display: none;
     }
@@ -333,9 +331,21 @@ $family2: "Inter";
         width: 100%;
 
         .searchContain {
-            width: 57%;
+            width: 45%;
             padding: 4px 8px;
-            gap: 8px;
+            gap: 4px;
+        }
+        .searchContain input{
+            width: 140px;
+        }
+        .searchContain img{
+            height: 16px;
+        }
+        .cart{
+            gap: 16px;
+            .cartIcons img{
+                height: 16px;
+            }
         }
       }
     }

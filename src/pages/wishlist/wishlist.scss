@@ -14,7 +14,7 @@ $family2: "Inter";
     padding: 80px 80px 150px 80px;
     .wishlistCont{
         display: flex;
-        gap: 740px;
+        gap: 700px;
     }
     .wishlistCont p, .wishlistCont1 p{
         font-family: $family1;
@@ -39,8 +39,8 @@ $family2: "Inter";
     }
     .cards{
         display: flex;
-        gap: 30px;
-        cursor: pointer;
+        gap: 45px;
+        // cursor: pointer;
     }
     .wishBottom{
         display: flex;
@@ -48,14 +48,18 @@ $family2: "Inter";
         gap: 60px;
         .wishlistCont1{
             display: flex;
-            gap: 780px;
+            gap: 665px;
             .justYou{
                 display: flex;
                 align-items: center;
                 gap: 16px;
             }
+          }
         }
-    }
+        .cards2{
+          display:flex;
+          gap: 30px;
+        }
 }
 
 

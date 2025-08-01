@@ -12,9 +12,27 @@ $family2: "Inter";
     display: flex;
     flex-direction: column;
     gap: 16px;
+    .cardsimage{
+        display: flex;
+        justify-content: center;
+        .eye{
+            cursor: pointer;
+        }
+    }
+    .cardsimage p{
+        background-color: #00ff66;
+        height: 15px;
+        border-radius: 4px;
+        padding: 8px 12px;
+        color: $text1-color;
+        font-family: $family1;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+    }
     .img img{
-        width: 245px;
-        height: 220px;
+        width: 150px;
+        height: 200px;
     }
     .cardsContent{
         display: flex;

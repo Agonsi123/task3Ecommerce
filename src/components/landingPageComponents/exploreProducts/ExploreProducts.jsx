@@ -16,6 +16,8 @@ import eop5 from "../../../assets/images/eop5.svg";
 import eop6 from "../../../assets/images/eop6.svg";
 import eop7 from "../../../assets/images/eop7.svg";
 import eop8 from "../../../assets/images/eop8.svg";
+import fillEye from "../../../assets/images/fillEye.svg";
+import fillHeart from "../../../assets/images/fillHeart.svg";
 import colourChange1 from "../../../assets/images/colourChange1.svg";
 import colourChange2 from "../../../assets/images/colourChange2.svg";
 import colourChange3 from "../../../assets/images/colourChange3.svg";
@@ -31,6 +33,8 @@ import { useNavigate } from "react-router-dom";
 const productList = [
   {
     id: 1,
+    eye: fillEye,
+    heart: fillHeart,
     image: eop1,
     title: "Breed Dry Dog Food",
     price: "$100",
@@ -41,6 +45,8 @@ const productList = [
   },
   {
     id: 2,
+    eye: fillEye,
+    heart: fillHeart,
     image: eop2,
     title: "CANON EOS DSLR Camer",
     price: "$360",
@@ -51,6 +57,8 @@ const productList = [
   },
   {
     id: 3,
+    eye: fillEye,
+    heart: fillHeart,
     image: eop3,
     title: "ASUS FHD Gaming Laptop",
     price: "$700",
@@ -61,6 +69,8 @@ const productList = [
   },
   {
     id: 4,
+    eye: fillEye,
+    heart: fillHeart,
     image: eop4,
     title: "Curology Product Set",
     price: "$500",
@@ -71,6 +81,9 @@ const productList = [
   },
   {
     id: 5,
+    text: 'New',
+    eye: fillEye,
+    heart: fillHeart,
     image: eop5,
     title: "Kids Electric Car",
     price: "$960",
@@ -82,6 +95,8 @@ const productList = [
   },
   {
     id: 6,
+    eye: fillEye,
+    heart: fillHeart,
     image: eop6,
     title: "Jr. Zoom Soccer Cleats",
     price: "$1160",
@@ -93,6 +108,9 @@ const productList = [
   },
   {
     id: 7,
+    text: 'New',
+    eye: fillEye,
+    heart: fillHeart,
     image: eop7,
     title: "GP11 Shooter USB Gamepad",
     price: "$660",
@@ -104,6 +122,8 @@ const productList = [
   },
   {
     id: 8,
+    eye: fillEye,
+    heart: fillHeart,
     image: eop8,
     title: "Quilted Satin Jacket",
     price: "$660",
@@ -139,35 +159,38 @@ const ExploreProducts = () => {
         img3={<img src={rightandLeftarrow} alt="Right and Left Arrows" />}
       />
       <div className="cards3">
-
         {upperProductList.map((product) => (
-          <div key={product.id} onClick={() => handleClick(product)}>
+          <div key={product.id}>
             <Card3
+              eye={<img src={product.eye} alt="eye icon" />}
+              heart={<img src={product.heart} alt="heart icon" />}
               image={<img src={product.image} alt={product.title} />}
               title={product.title}
               price={product.price}
               star={<img src={product.star} alt="ratings" />}
               num={product.num}
+              onEyeClick={() => handleClick(product)}
             />
           </div>
         ))}
-        
       </div>
       <div className="cards3">
-
         {lowerProductList.map((product) => (
-          <div key={product.id} onClick={() => handleClick(product)}>
+          <div key={product.id}>
             <Card3
+              text={product.text}
+              eye={<img src={product.eye} alt="eye icon" />}
+              heart={<img src={product.heart} alt="heart icon" />}
               image={<img src={product.image} alt={product.title} />}
               title={product.title}
               price={product.price}
               star={<img src={product.star} alt="ratings" />}
               num={product.num}
               color={<img src={product.color} alt="color change" />}
+              onEyeClick={() => handleClick(product)}
             />
           </div>
         ))}
-
       </div>
       <Button>View All Products</Button>
     </section>

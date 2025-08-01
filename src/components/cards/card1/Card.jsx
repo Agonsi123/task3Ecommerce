@@ -23,17 +23,32 @@ const Card = ({
   return (
     <div className="cardContainer">
       <div className="topcardContainer">
-        <div className="topCard">
+        
+
+        {text && eye && heart ? (
           <div className="topRight">
             <p>{text}</p>
+            <div className="img">{image}</div>
             <div className="topIcons">
               <div>{heart}</div>
-              <div className='eye' onClick={onEyeClick}>{eye}</div>
+              <div className="eye" onClick={onEyeClick}>
+                {eye}
+              </div>
             </div>
           </div>
-          <div className="img">{image}</div>
-        </div>
-        {btn ? <button className="bottomCard">Add To Cart</button> : ""}
+        ) : (
+          <div className="topRight">
+            <div className="img">{image}</div>
+            <div className="topIcons">
+              <div>{heart}</div>
+              <div className="eye" onClick={onEyeClick}>
+                {eye}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {btn ? <button className="bottomCard">{btn}</button> : ""}
         {/* <button className="bottomCard">Add To Cart</button> */}
       </div>
       <div className="cardContent">

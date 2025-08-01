@@ -35,7 +35,21 @@ const productList = [
     description:
       "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
   },
- 
+  {
+    id: 2,
+    text: "-35%",
+    eye: fillEye,
+    heart: fillHeart,
+    image: hp2,
+    title: "AK-900 Wired Keyboard",
+    newPrice: "$960",
+    oldPrice: "$1160",
+    star: FourStar,
+    num: "(75)",
+    btn: "Add To Cart",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis exercitationem recusandae dicta praesentium omnis? Fugit at hic debitis ipsum eius velit numquam omnis.",
+  },
   {
     id: 3,
     text: "-30%",
@@ -66,23 +80,7 @@ const productList = [
   },
 ];
 
-const productListB = [
-  {
-    id: 2,
-    text: "-35%",
-    eye: fillEye,
-    heart: fillHeart,
-    image: hp2,
-    title: "AK-900 Wired Keyboard",
-    newPrice: "$960",
-    oldPrice: "$1160",
-    star: FourStar,
-    num: "(75)",
-    btn: "",
-    description:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis exercitationem recusandae dicta praesentium omnis? Fugit at hic debitis ipsum eius velit numquam omnis.",
-  },
-];
+
 
 const Sales = () => {
   // const products = useSelector((state) => state.inventory.products);
@@ -112,23 +110,6 @@ const Sales = () => {
         <div className="cards">
           {productList.map((product) => (
             <div key={product.id} >
-              <Card
-                text={product.text}
-                eye={<img src={product.eye} alt="eye Icon" />}
-                heart={<img src={product.heart} alt="heart Icon" />}
-                image={<img src={product.image} alt={product.title} />}
-                title={product.title}
-                newPrice={product.newPrice}
-                oldPrice={product.oldPrice}
-                star={<img src={product.star} alt="ratings" />}
-                num={product.num}
-                onEyeClick={() => handleClick(product)}
-              />
-            </div>
-          ))}
-
-          {productListB.map((product) => (
-            <div key={product.id}>
               <Card
                 text={product.text}
                 eye={<img src={product.eye} alt="eye Icon" />}

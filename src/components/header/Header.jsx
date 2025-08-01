@@ -188,7 +188,7 @@ const Header = () => {
             <NavLink to="/about" onClick={() => dispatch(closeMenu())}>
               About
             </NavLink>
-            {isAuth ? (
+            {isLoggedIn ? (
               <>
                 <span className="welcomeText">Hello, {user.name}</span>
                 <span

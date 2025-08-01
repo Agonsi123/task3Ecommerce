@@ -9,6 +9,8 @@ import bsp1 from "../../../assets/images/bsp1.svg";
 import bsp2 from "../../../assets/images/bsp2.svg";
 import bsp3 from "../../../assets/images/bsp3.svg";
 import bsp4 from "../../../assets/images/bsp4.svg";
+import fillEye from "../../../assets/images/fillEye.svg";
+import fillHeart from "../../../assets/images/fillHeart.svg";
 import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../../store/productSlice";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 const productList = [
   {
     id: 1,
+    eye: fillEye,
+    heart: fillHeart,
     image: bsp1,
     title: "The north coat",
     newPrice: "$260",
@@ -28,6 +32,8 @@ const productList = [
   },
   {
     id: 2,
+    eye: fillEye,
+    heart: fillHeart,
     image: bsp2,
     title: "Gucci duffle bag",
     newPrice: "$960",
@@ -39,6 +45,8 @@ const productList = [
   },
   {
     id: 3,
+    eye: fillEye,
+    heart: fillHeart,
     image: bsp3,
     title: "RGB liquid CPU Cooler",
     newPrice: "$160",
@@ -50,6 +58,8 @@ const productList = [
   },
   {
     id: 4,
+    eye: fillEye,
+    heart: fillHeart,
     image: bsp4,
     title: "Small BookSelf",
     newPrice: "$360",
@@ -80,18 +90,20 @@ const BsProducts = () => {
       />
       <div className="cards">
         {productList.map((card) => (
-          <div key={card.id} onClick={() => handleClick(card)}>
+          <div key={card.id}>
             <Card
+              eye={<img src={card.eye} alt="eye" />}
+              heart={<img src={card.heart} alt="heart" />}
               image={<img src={card.image} alt={card.title} />}
               title={card.title}
               newPrice={card.newPrice}
               oldPrice={card.oldPrice}
               star={<img src={card.star} alt={card.title} />}
               num={card.num}
+              onEyeClick={() => handleClick(card)}
             />
           </div>
         ))}
-
       </div>
     </section>
   );

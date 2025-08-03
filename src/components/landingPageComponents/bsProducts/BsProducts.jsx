@@ -11,8 +11,8 @@ import bsp3 from "../../../assets/images/bsp3.svg";
 import bsp4 from "../../../assets/images/bsp4.svg";
 import fillEye from "../../../assets/images/fillEye.svg";
 import fillHeart from "../../../assets/images/fillHeart.svg";
-import { useDispatch } from "react-redux";
-import { setSelectedProduct } from "../../../store/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedProduct, addToWishlist, removeFromWishlist } from "../../../store/productSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -74,11 +74,29 @@ const productList = [
 const BsProducts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const wishlist = useSelector((state) => state.product.wishlist);
+
+  // Handle view items in product details
   const handleClick = (card) => {
     dispatch(setSelectedProduct(card));
     navigate(`/product/${card.id}`);
   };
+
+   // Handle add to wishlist
+  const isInWishlist = (productId) => wishlist.some((item) => item.id === productId);
+  
+  const handleWishlistToggle = (product) => {
+    if (isInWishlist(product.id)) {
+      dispatch(removeFromWishlist(product.id));
+    } else {
+      dispatch(addToWishlist(product));
+      navigate("/wishlist");
+    }
+  };
+
+
+  
+
 
   return (
     <section className="productContainer">
@@ -89,21 +107,44 @@ const BsProducts = () => {
         btn
       />
       <div className="cards">
-        {productList.map((card) => (
-          <div key={card.id}>
-            <Card
-              eye={<img src={card.eye} alt="eye" />}
-              heart={<img src={card.heart} alt="heart" />}
-              image={<img src={card.image} alt={card.title} />}
-              title={card.title}
-              newPrice={card.newPrice}
-              oldPrice={card.oldPrice}
-              star={<img src={card.star} alt={card.title} />}
-              num={card.num}
-              onEyeClick={() => handleClick(card)}
-            />
-          </div>
-        ))}
+        {productList.map((card) => {
+          const isWishlisted = isInWishlist(card.id);
+          
+          return (
+            <div key={card.id}>
+              <Card
+                eye={<img src={card.eye} alt="eye" />}
+                heart={
+                  !isWishlisted ? (
+                  <img
+                  src={card.heart} 
+                  alt="Add to wishlist"
+                  onClick={() => handleWishlistToggle(card)}
+                  />
+                  ) : null
+                }
+                trash={
+                  isWishlisted ? (
+                    <span onClick={() => handleWishlistToggle(card)}>
+                      <img
+                        src={card.heart}
+                        alt="trash Icon"
+                         // onClick={() => handleWishlistToggle(product)}
+                      />
+                    </span>
+                  ) : null
+                }
+                image={<img src={card.image} alt={card.title} />}
+                title={card.title}
+                newPrice={card.newPrice}
+                oldPrice={card.oldPrice}
+                star={<img src={card.star} alt={card.title} />}
+                num={card.num}
+                onEyeClick={() => handleClick(card)}
+              />
+            </div>
+          );
+        })}
       </div>
     </section>
   );

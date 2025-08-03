@@ -20,9 +20,12 @@ const SCart = () => {
   };
 
   // Calculate Sub-Total using reduce()
-  const cartSubtotal = cart.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
+  // const cartSubtotal = cart.reduce((total, item) => {
+  //   return total + item.price * item.quantity;
+  // }, 0);
+
+  const subtotal = useSelector((state) => state.inventory.subtotal);
+  const total = useSelector((state) => state.inventory.total);
 
   //To handle clear cart
   const handleClearCart = () => {
@@ -36,6 +39,15 @@ const SCart = () => {
     dispatch(checkout());
     alert("You have successfully checked out of your cart ");
     navigate("/")
+  };
+
+  // Handle Change in quantity of product in cart
+  const handleQtyChange = (id, newQty) => {
+    if (newQty < 1) {
+      dispatch(removeFromCart(id));
+    }else {
+      dispatch(setQuantity({ id, quantity: newQty }));
+    }
   };
 
 
@@ -69,7 +81,7 @@ const SCart = () => {
                         min="1"
                         value={item.quantity}
                         onChange={(e) =>
-                          dispatch(setQuantity({ id: item.id, quantity: Number(e.target.value) }))
+                          handleQtyChange(item.id, parseInt(e.target.value))
                         }
                       />
                     </div>
@@ -84,7 +96,7 @@ const SCart = () => {
           )}
         </div>
         <div className="scartDCont">
-          <button onClick={() => navigate("/wishlist")}>Return To Shop</button>
+          <button onClick={() => navigate("/")}>Return To Shop</button>
           <button onClick={handleClearCart}>Clear Cart</button>
         </div>
       </div>
@@ -101,7 +113,7 @@ const SCart = () => {
           <p>Cart Total</p>
           <div className="subtotal">
             <p>Subtotal:</p>
-            <p>${cartSubtotal.toFixed(2)}</p>
+            <p>${subtotal.toFixed(2)}</p>
           </div>
           <div className="subtotal">
             <p>Shipping:</p>
@@ -109,7 +121,7 @@ const SCart = () => {
           </div>
           <div className="subtotal">
             <p>Total:</p>
-            <p>${cartSubtotal.toFixed(2)}</p>
+            <p>${total.toFixed(2)}</p>
           </div>
           <Button onClick={handleCheckOut}>Proceed to checkout</Button>
         </div>

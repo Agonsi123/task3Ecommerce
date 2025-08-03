@@ -1,7 +1,7 @@
-import React from 'react';
-import './exploreProducts.scss';
-import FlashSales from '../../flashSales/FlashSales';
-import Card3 from '../../cards/card3/Card3';
+import React from "react";
+import "./exploreProducts.scss";
+import FlashSales from "../../flashSales/FlashSales";
+import Card3 from "../../cards/card3/Card3";
 import redRectangle from "../../../assets/images/redRectangle.svg";
 import rightandLeftarrow from "../../../assets/images/rightandLeft arrow.svg";
 import FiveStar from "../../../assets/images/FiveStar.svg";
@@ -22,13 +22,11 @@ import colourChange1 from "../../../assets/images/colourChange1.svg";
 import colourChange2 from "../../../assets/images/colourChange2.svg";
 import colourChange3 from "../../../assets/images/colourChange3.svg";
 import colourChange4 from "../../../assets/images/colourChange4.svg";
-import Button from '../../buttons/Button';
-import { useDispatch } from "react-redux";
-import { setSelectedProduct } from "../../../store/productSlice";
+import Button from "../../buttons/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedProduct, addToWishlist, removeFromWishlist } from "../../../store/productSlice";
+import { addToCart } from "../../../store/inventorySlice";
 import { useNavigate } from "react-router-dom";
-
-
-
 
 const productList = [
   {
@@ -37,11 +35,11 @@ const productList = [
     heart: fillHeart,
     image: eop1,
     title: "Breed Dry Dog Food",
-    price: "$100",
+    newPrice: "$100",
     star: ThreeStar,
     num: "(35)",
     description:
-      "Designed for warmth and protection in cold or inclement wether, often for outdoor activities like hiking, climbing or everyday wear in winter.",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis exercitationem recusandae dicta praesentium omnis? Fugit at hic debitis ipsum eius velit numquam omnis",
   },
   {
     id: 2,
@@ -49,7 +47,7 @@ const productList = [
     heart: fillHeart,
     image: eop2,
     title: "CANON EOS DSLR Camer",
-    price: "$360",
+    newPrice: "$360",
     star: FourStar,
     num: "(55)",
     btn: "Add To Cart",
@@ -62,7 +60,7 @@ const productList = [
     heart: fillHeart,
     image: eop3,
     title: "ASUS FHD Gaming Laptop",
-    price: "$700",
+    newPrice: "$700",
     star: FiveStar,
     num: "(325)",
     description:
@@ -74,7 +72,7 @@ const productList = [
     heart: fillHeart,
     image: eop4,
     title: "Curology Product Set",
-    price: "$500",
+    newPrice: "$500",
     star: FourStar,
     num: "(1455)",
     description:
@@ -82,12 +80,12 @@ const productList = [
   },
   {
     id: 5,
-    text: 'New',
+    text: "New",
     eye: fillEye,
     heart: fillHeart,
     image: eop5,
     title: "Kids Electric Car",
-    price: "$960",
+    newPrice: "$960",
     star: FiveStar,
     num: "(65)",
     color: colourChange1,
@@ -100,7 +98,7 @@ const productList = [
     heart: fillHeart,
     image: eop6,
     title: "Jr. Zoom Soccer Cleats",
-    price: "$1160",
+    newPrice: "$1160",
     star: FiveStar,
     num: "(35)",
     color: colourChange2,
@@ -109,12 +107,12 @@ const productList = [
   },
   {
     id: 7,
-    text: 'New',
+    text: "New",
     eye: fillEye,
     heart: fillHeart,
     image: eop7,
     title: "GP11 Shooter USB Gamepad",
-    price: "$660",
+    newPrice: "$660",
     star: FourHalfStar,
     num: "(55)",
     color: colourChange3,
@@ -127,7 +125,7 @@ const productList = [
     heart: fillHeart,
     image: eop8,
     title: "Quilted Satin Jacket",
-    price: "$660",
+    newPrice: "$660",
     star: FourHalfStar,
     num: "(55)",
     color: colourChange4,
@@ -136,19 +134,44 @@ const productList = [
   },
 ];
 
-
 const ExploreProducts = () => {
   const upperProductList = productList.slice(0, 4);
   const lowerProductList = productList.slice(4, 8);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const wishlist = useSelector((state) => state.product.wishlist);
+
+  // Handle view items in product details
   const handleClick = (product) => {
     dispatch(setSelectedProduct(product));
     navigate(`/product/${product.id}`);
   };
 
+  // Handle add to wishlist
+  const isInWishlist = (productId) => wishlist.some((item) => item.id === productId);
+
+  const handleWishlistToggle = (product) => {
+    if (isInWishlist(product.id)) {
+      dispatch(removeFromWishlist(product.id));
+    } else {
+      dispatch(addToWishlist(product));
+      navigate("/wishlist");
+    }
+  };
+
+  //To handle adding items to cart
+  const handleAddToCart = (product) => {
+    const formattedProduct = {
+      id: product.id,
+      title: product.title,
+      image: typeof product.image === "string" ? product.image : product.image.props?.src || "",
+      price: Number(product.newPrice.replace(/\$/g, "")),
+      quantity: 1,
+    };
+    dispatch(addToCart(formattedProduct));
+    navigate("/scart");
+  };
 
   return (
     <section className="exploreContainer">
@@ -160,43 +183,82 @@ const ExploreProducts = () => {
         img3={<img src={rightandLeftarrow} alt="Right and Left Arrows" />}
       />
       <div className="cards3">
-        {upperProductList.map((product) => (
-          <div key={product.id}>
-            <Card3
-              eye={<img src={product.eye} alt="eye icon" />}
-              heart={<img src={product.heart} alt="heart icon" />}
-              image={<img src={product.image} alt={product.title} />}
-              title={product.title}
-              price={product.price}
-              star={<img src={product.star} alt="ratings" />}
-              num={product.num}
-              btn={product.btn}
-              onEyeClick={() => handleClick(product)}
-            />
-          </div>
-        ))}
+        {upperProductList.map((product) => {
+          const isWishlisted = isInWishlist(product.id);
+
+          return (
+            <div key={product.id}>
+              <Card3
+                eye={<img src={product.eye} alt="see details" />}
+                heart={
+                  !isWishlisted ? (
+                    <img
+                      src={product.heart}
+                      alt="Add to wishlist"
+                      onClick={() => handleWishlistToggle(product)}
+                    />
+                  ) : null
+                }
+                trash={
+                  isWishlisted ? (
+                    <span onClick={() => handleWishlistToggle(product)}>
+                      <img src={product.heart} alt="trash Icon" />
+                    </span>
+                  ) : null
+                }
+                image={<img src={product.image} alt={product.title} />}
+                title={product.title}
+                newPrice={product.newPrice}
+                star={<img src={product.star} alt="ratings" />}
+                num={product.num}
+                btn={product.btn}
+                onEyeClick={() => handleClick(product)}
+                onButtonClick={() => handleAddToCart(product)}
+              />
+            </div>
+          );
+        })}
       </div>
       <div className="cards3">
-        {lowerProductList.map((product) => (
-          <div key={product.id}>
-            <Card3
-              text={product.text}
-              eye={<img src={product.eye} alt="eye icon" />}
-              heart={<img src={product.heart} alt="heart icon" />}
-              image={<img src={product.image} alt={product.title} />}
-              title={product.title}
-              price={product.price}
-              star={<img src={product.star} alt="ratings" />}
-              num={product.num}
-              color={<img src={product.color} alt="color change" />}
-              onEyeClick={() => handleClick(product)}
-            />
-          </div>
-        ))}
+        {lowerProductList.map((product) => {
+          const isWishlisted = isInWishlist(product.id);
+
+          return (
+            <div key={product.id}>
+              <Card3
+                text={product.text}
+                eye={<img src={product.eye} alt="eye icon" />}
+                heart={
+                  !isWishlisted ? (
+                    <img
+                      src={product.heart}
+                      alt="Add to wishlist"
+                      onClick={() => handleWishlistToggle(product)}
+                    />
+                  ) : null
+                }
+                trash={
+                  isWishlisted ? (
+                    <span onClick={() => handleWishlistToggle(product)}>
+                      <img src={product.heart} alt="trash Icon" />
+                    </span>
+                  ) : null
+                }
+                image={<img src={product.image} alt={product.title} />}
+                title={product.title}
+                newPrice={product.newPrice}
+                star={<img src={product.star} alt="ratings" />}
+                num={product.num}
+                color={<img src={product.color} alt="color change" />}
+                onEyeClick={() => handleClick(product)}
+              />
+            </div>
+          );
+        })}
       </div>
       <Button>View All Products</Button>
     </section>
   );
-}
+};
 
-export default ExploreProducts
+export default ExploreProducts;

@@ -13,7 +13,9 @@ import trash from "../../assets/images/trash.svg";
 import fillEye from "../../assets/images/fillEye.svg";
 import FiveStar from "../../assets/images/FiveStar.svg";
 import redRectangle from "../../assets/images/redRectangle.svg";
-import { useDispatch } from "react-redux";
+import { FaTrashCan } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromWishlist, removeMultipleFromWishlist } from "../../store/productSlice";
 import { addToCart, addMultipleToCart } from "../../store/inventorySlice";
 import { useNavigate } from "react-router-dom";
 
@@ -128,18 +130,39 @@ const Wishlist = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const wishlist = useSelector((state) => state.product.wishlist);
 
   //To handle adding items to cart
-  const handleAddToCart = (id) => {
-    dispatch(addToCart(id));
+  const handleAddToCart = (product) => {
+    const formattedProduct = {
+      id: product.id,
+      title: product.title,
+      image: typeof product.image === "string" ? product.image : product.image.props?.src || "",
+      price: Number(product.newPrice.replace(/\$/g, "")),
+      quantity: 1,
+    };
+    dispatch(addToCart(formattedProduct));
     navigate("/scart");
   };
 
   // To handle bulk adding
+
   const handleMoveAllToBag = () => {
-    const allWishItemIds = wishItems.map((item) => item.id);
-    dispatch(addMultipleToCart(allWishItemIds));
+    const allWishItemsFormatted = wishlist.map((product) => ({
+      id: product.id,
+      title: product.title,
+      image: typeof product.image === "string" ? product.image : product.image.props?.src || "",
+      price: Number((product.price || product.newPrice || "0").toString().replace(/\$/g, "")),
+      quantity: product.quantity || 1,
+    }));
+    dispatch(addMultipleToCart(allWishItemsFormatted));
+    dispatch(removeMultipleFromWishlist(wishlist.map((item) => item.id)));
     navigate("/scart");
+  };
+
+  // Handle remove product from wishlist
+  const handleRemove = (productId) => {
+    dispatch(removeFromWishlist(productId));
   };
 
   return (
@@ -148,24 +171,47 @@ const Wishlist = () => {
         <p>Wishlist (4)</p>
         <button onClick={handleMoveAllToBag}>Move All To Bag</button>
       </div>
-      <div className="cards">
-        {upperWishItems.map((card) => (
-          <div key={card.id}>
-            <Card
-              text={card.text}
-              trash={<img src={card.trash} alt="trash Icon" />}
-              image={card.image}
-              title={card.title}
-              newPrice={card.newPrice}
-              oldPrice={card.oldPrice}
-              star={card.star}
-              num={card.num}
-              btn={card.btn}
-              onButtonClick={() => handleAddToCart(card.id)}
-            />
-          </div>
-        ))}
-      </div>
+      {wishlist.length === 0 ? (
+        <p className="empty">Your wishlist is empty.</p>
+      ) : (
+        <div className="cards">
+          {wishlist.map((product) => (
+            <div key={product.id} className="wishlistCard">
+              <div className="cardImage">
+                <img src={product.image} alt={product.title} />
+                <button className="removeBtn" onClick={() => handleRemove(product.id)}>
+                  <FaTrashCan />
+                </button>
+              </div>
+              <div className="addtoCartBtn" onClick={() => handleAddToCart(product)}>
+                Add To Cart
+              </div>
+              <div className="info">
+                <h4>{product.title}</h4>
+                <div className="cardPrice">
+                  <p className="newPrice">{product.newPrice}</p>
+                  <p>
+                    <strike>{product.oldPrice}</strike>
+                  </p>
+                </div>
+              </div>
+
+              {/* <Card
+                text={product.text}
+                trash={<img src={product.trash} alt="trash Icon" />}
+                image={product.image}
+                title={product.title}
+                newPrice={product.newPrice}
+                oldPrice={product.oldPrice}
+                star={product.star}
+                num={product.num}
+                btn={product.btn}
+                onButtonClick={() => handleAddToCart(product.id)}
+              /> */}
+            </div>
+          ))}
+        </div>
+      )}
       <div className="wishBottom">
         <div className="wishlistCont1">
           <div className="justYou">
@@ -190,7 +236,7 @@ const Wishlist = () => {
                 star={card.star}
                 num={card.num}
                 btn={card.btn}
-                onButtonClick={() => handleAddToCart(card.id)}
+                // onButtonClick={() => handleAddToCart(card.id)}
               />
             </div>
           ))}

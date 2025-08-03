@@ -185,7 +185,9 @@ export const Cart = ({ heart, heart2, cart, cart2, user, user2 }) => {
       <Link to="/wishlist">
         <div className="cartIcons">{heart}</div>
       </Link>
-      <div className="cartIcons">{heart2}</div>
+      <Link to="/wishlist">
+        <div className="cartIcons">{heart2}</div>
+      </Link>
       <Link to="/scart">
         <div className="cartIcons">{cart}</div>
       </Link>

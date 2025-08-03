@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Save selected product in localStorage if available
-// const savedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+
 
 let savedProduct = null;
 try{
@@ -13,10 +13,22 @@ try{
     console.warn("failed to parse selectedProduct from localStorage:", error);
 }
 
+// Load wishlist from localStorage
+let savedWishlist = [];
+try{
+    const raw = localStorage.getItem("wishlist");
+    if (raw && raw !== "undefined") {
+        savedWishlist = JSON.parse(raw);
+    }
+}catch (error) {
+    console.warn("failed to parse wishlist from localStorage:", error);
+}
+
 const productSlice = createSlice({
     name: "product",
     initialState: {
         selectedProduct: savedProduct || null,
+        wishlist: savedWishlist || [],
     },
     reducers: {
         setSelectedProduct: (state, action) => {
@@ -34,16 +46,34 @@ const productSlice = createSlice({
 
             state.selectedProduct = serializablePayload;
             localStorage.setItem("selectedProduct", JSON.stringify(serializablePayload));
-            // state.selectedProduct = action.payload;
-            // localStorage.setItem("selectedProduct", JSON.stringify(action.payload));
+    
         },
         clearSelectedProduct: (state) => {
             state.selectedProduct = null;
             localStorage.removeItem("selectedProduct");
         },
+
+        addToWishlist: (state, action) => {
+            const product = action.payload;
+            const exists = state.wishlist.find(item => item.id === product.id);
+            if (!exists) {
+                state.wishlist.push(product);
+                localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
+            }
+        },
+
+        removeFromWishlist: (state, action) => {
+            const productId = action.payload;
+            state.wishlist = state.wishlist.filter(item => item.id !== productId);
+            localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
+        },
+        removeMultipleFromWishlist: (state, action) => {
+            const idsToRemove = action.payload;
+            state.wishlist = state.wishlist.filter(item => !idsToRemove.includes(item.id));
+        },
     },
 });
 
-export const {setSelectedProduct, clearSelectedProduct} = productSlice.actions;
+export const { setSelectedProduct, clearSelectedProduct, addToWishlist, removeFromWishlist, removeMultipleFromWishlist } = productSlice.actions;
 
 export default productSlice.reducer;

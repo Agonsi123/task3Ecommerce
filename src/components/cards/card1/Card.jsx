@@ -1,8 +1,5 @@
-import React from 'react';
-import './card.scss';
-
-
-
+import React from "react";
+import "./card.scss";
 
 const Card = ({
   text,
@@ -19,10 +16,8 @@ const Card = ({
   btn,
   description,
   onEyeClick,
-  onButtonClick
+  onButtonClick,
 }) => {
-
-  
   return (
     <div className="cardContainer">
       <div className="topcardContainer">
@@ -32,7 +27,7 @@ const Card = ({
             {texT && <p className="texT">{texT}</p>}
             <div className="img">{image}</div>
             <div className="topIcons">
-              <div>{heart}</div>
+              <div className="heart">{heart}</div>
               <div className="eye" onClick={onEyeClick}>
                 {eye}
               </div>
@@ -44,7 +39,7 @@ const Card = ({
             {texT && <p className="texT">{texT}</p>}
             <div className="img">{image}</div>
             <div className="topIcons">
-              <div>{heart}</div>
+              <div className="heart">{heart}</div>
               <div className="eye" onClick={onEyeClick}>
                 {eye}
               </div>
@@ -77,4 +72,4 @@ const Card = ({
   );
 };
 
-export default Card
+export default Card;

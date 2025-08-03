@@ -1,6 +1,6 @@
 import React from "react";
 import "./sales.scss";
-import FlashSales from '../../flashSales/FlashSales';
+import FlashSales from "../../flashSales/FlashSales";
 import Card from "../../cards/card1/Card";
 import Button from "../../buttons/Button";
 import dateImage from "../../../assets/images/dateImage.svg";
@@ -12,13 +12,13 @@ import hp1 from "../../../assets/images/hp1.svg";
 import hp2 from "../../../assets/images/hp2.svg";
 import hp3 from "../../../assets/images/hp3.svg";
 import hp4 from "../../../assets/images/hp4.svg";
+import trash from "../../../assets/images/trash.svg";
 import fillEye from "../../../assets/images/fillEye.svg";
 import fillHeart from "../../../assets/images/fillHeart.svg";
-import { useDispatch } from "react-redux";
-import { setSelectedProduct } from "../../../store/productSlice";
-// import { addToCart } from "../../../store/inventorySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedProduct, addToWishlist, removeFromWishlist } from "../../../store/productSlice";
+import { addToCart } from "../../../store/inventorySlice";
 import { useNavigate } from "react-router-dom";
-
 
 const productList = [
   {
@@ -80,23 +80,43 @@ const productList = [
   },
 ];
 
-
-
 const Sales = () => {
   // const products = useSelector((state) => state.inventory.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const wishlist = useSelector((state) => state.product.wishlist);
 
+  // Handle view items in product details
   const handleClick = (product) => {
     dispatch(setSelectedProduct(product));
     navigate(`/product/${product.id}`);
   };
 
+  // Handle add to wishlist
+  const isInWishlist = (productId) => wishlist.some((item) => item.id === productId);
+
+  const handleWishlistToggle = (product) => {
+    if (isInWishlist(product.id)) {
+      dispatch(removeFromWishlist(product.id));
+    } else {
+      dispatch(addToWishlist(product));
+      navigate("/wishlist");
+    }
+  };
+
   //To handle adding items to cart
-  // const handleAddToCart = (id) => {
-  //   dispatch(addToCart(id));
-  //   navigate("/scart")
-  // };
+  const handleAddToCart = (product) => {
+    const formattedProduct = {
+      id: product.id,
+      title: product.title,
+      image: typeof product.image === "string" ? product.image : product.image.props?.src || "",
+      price: Number(product.newPrice.replace(/\$/g, "")),
+      quantity: 1,
+    };
+    dispatch(addToCart(formattedProduct));
+    navigate("/scart");
+  };
+
   return (
     <div>
       <section className="salesContainer">
@@ -108,24 +128,47 @@ const Sales = () => {
           img3
         />
         <div className="cards">
-          {productList.map((product) => (
-            <div key={product.id} >
-              <Card
-                text={product.text}
-                eye={<img src={product.eye} alt="eye Icon" />}
-                heart={<img src={product.heart} alt="heart Icon" />}
-                image={<img src={product.image} alt={product.title} />}
-                title={product.title}
-                newPrice={product.newPrice}
-                oldPrice={product.oldPrice}
-                star={<img src={product.star} alt="ratings" />}
-                num={product.num}
-                btn={product.btn}
-                onEyeClick={() => handleClick(product)}
-              />
-            </div>
-          ))}
+          {productList.map((product) => {
+            const isWishlisted = isInWishlist(product.id);
 
+            return (
+              <div key={product.id}>
+                <Card
+                  text={product.text}
+                  eye={<img src={product.eye} alt="eye Icon" />}
+                  heart={
+                    !isWishlisted ? (
+                      <img
+                        src={product.heart}
+                        alt="Add to wishlist"
+                        onClick={() => handleWishlistToggle(product)}
+                      />
+                    ) : null
+                  }
+                  trash={
+                    isWishlisted ? (
+                      <span onClick={() => handleWishlistToggle(product)}>
+                        <img
+                          src={product.heart}
+                          alt="trash Icon"
+                          // onClick={() => handleWishlistToggle(product)}
+                        />
+                      </span>
+                    ) : null
+                  }
+                  image={<img src={product.image} alt={product.title} />}
+                  title={product.title}
+                  newPrice={product.newPrice}
+                  oldPrice={product.oldPrice}
+                  star={<img src={product.star} alt="ratings" />}
+                  num={product.num}
+                  btn={product.btn}
+                  onButtonClick={() => handleAddToCart(product)}
+                  onEyeClick={() => handleClick(product)}
+                />
+              </div>
+            );
+          })}
         </div>
         <Button>View All Products</Button>
       </section>

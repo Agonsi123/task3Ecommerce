@@ -15,7 +15,11 @@ import FiveStar from "../../assets/images/FiveStar.svg";
 import redRectangle from "../../assets/images/redRectangle.svg";
 import { FaTrashCan } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromWishlist, removeMultipleFromWishlist } from "../../store/productSlice";
+import {
+  setSelectedProduct,
+  removeFromWishlist,
+  removeMultipleFromWishlist,
+} from "../../store/productSlice";
 import { addToCart, addMultipleToCart } from "../../store/inventorySlice";
 import { useNavigate } from "react-router-dom";
 
@@ -23,98 +27,49 @@ const wishItems = [
   {
     id: 1,
     text: "-35%",
-    trash: trash,
-    image: <img src={bsp2} alt="bag" />,
-    title: "Gucci duffle bag",
+    eye: fillEye,
+    image: eop3,
+    title: "ASUS FHD Gaming Laptop",
     newPrice: "$960",
     oldPrice: "$1160",
-    star: "",
-    num: "",
+    star: FiveStar,
+    num: "(65)",
     btn: "Add To Cart",
     quantity: 1,
   },
   {
     id: 2,
-    trash: trash,
-    image: <img src={bsp3} alt="bag" />,
-    title: "RGB liquid CPU Cooler",
-    newPrice: "$1960",
+    eye: fillEye,
+    image: hp3,
+    title: "IPS LCD Gaming Monitor",
+    newPrice: "$1160",
     oldPrice: "",
-    star: "",
-    num: "",
+    star: FiveStar,
+    num: "(65)",
     btn: "Add To Cart",
     quantity: 1,
   },
   {
     id: 3,
-    trash: trash,
-    image: <img src={eop7} alt="bag" />,
-    title: "GP11 Shooter USB Gamepad",
-    newPrice: "$550",
+    texT: "New",
+    eye: fillEye,
+    image: hp1,
+    title: "HAVIT HV-G92 Gamepad",
+    newPrice: "$560",
     oldPrice: "",
-    star: "",
-    num: "",
+    star: FiveStar,
+    num: "(65)",
     btn: "Add To Cart",
     quantity: 1,
   },
   {
     id: 4,
-    trash: trash,
-    image: <img src={eop8} alt="bag" />,
-    title: "Quilted Satin Jacket",
-    newPrice: "$750",
-    oldPrice: "",
-    star: "",
-    num: "",
-    btn: "Add To Cart",
-    quantity: 1,
-  },
-  {
-    id: 5,
-    text: "-35%",
     eye: fillEye,
-    image: <img src={eop3} alt="bag" />,
-    title: "ASUS FHD Gaming Laptop",
-    newPrice: "$960",
-    oldPrice: "$1160",
-    star: <img src={FiveStar} alt="star" />,
-    num: "(65)",
-    btn: "Add To Cart",
-    quantity: 1,
-  },
-  {
-    id: 6,
-    eye: fillEye,
-    image: <img src={hp3} alt="bag" />,
-    title: "IPS LCD Gaming Monitor",
-    newPrice: "$1160",
-    oldPrice: "",
-    star: <img src={FiveStar} alt="bag" />,
-    num: "(65)",
-    btn: "Add To Cart",
-    quantity: 1,
-  },
-  {
-    id: 7,
-    texT: "New",
-    eye: fillEye,
-    image: <img src={hp1} alt="bag" />,
-    title: "HAVIT HV-G92 Gamepad",
-    newPrice: "$560",
-    oldPrice: "",
-    star: <img src={FiveStar} alt="bag" />,
-    num: "(65)",
-    btn: "Add To Cart",
-    quantity: 1,
-  },
-  {
-    id: 8,
-    eye: fillEye,
-    image: <img src={hp2} alt="bag" />,
+    image: hp2,
     title: "AK-900 Wired Keyboard",
     newPrice: "$200",
     oldPrice: "",
-    star: <img src={FiveStar} alt="bag" />,
+    star: FiveStar,
     num: "(65)",
     btn: "Add To Cart",
     quantity: 1,
@@ -122,12 +77,6 @@ const wishItems = [
 ];
 
 const Wishlist = () => {
-  const upperWishItems = wishItems.slice(0, 4);
-  // console.log(upperWishItems);
-
-  const lowerWishItems = wishItems.slice(4, 8);
-  // console.log(lowerWishItems);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const wishlist = useSelector((state) => state.product.wishlist);
@@ -165,6 +114,12 @@ const Wishlist = () => {
     dispatch(removeFromWishlist(productId));
   };
 
+  // Handle view items in product details
+  const handleClick = (card) => {
+    dispatch(setSelectedProduct(card));
+    navigate(`/product/${card.id}`);
+  };
+
   return (
     <div className="wishlistContainer">
       <div className="wishlistCont">
@@ -195,19 +150,6 @@ const Wishlist = () => {
                   </p>
                 </div>
               </div>
-
-              {/* <Card
-                text={product.text}
-                trash={<img src={product.trash} alt="trash Icon" />}
-                image={product.image}
-                title={product.title}
-                newPrice={product.newPrice}
-                oldPrice={product.oldPrice}
-                star={product.star}
-                num={product.num}
-                btn={product.btn}
-                onButtonClick={() => handleAddToCart(product.id)}
-              /> */}
             </div>
           ))}
         </div>
@@ -223,20 +165,21 @@ const Wishlist = () => {
           <button onClick={() => navigate("")}>See All</button>
         </div>
         <div className="cards2">
-          {lowerWishItems.map((card) => (
+          {wishItems.map((card) => (
             <div key={card.id}>
               <Card
                 text={card.text}
                 texT={card.texT}
-                eye={<img src={card.eye} alt="eye Icon" />}
-                image={card.image}
+                eye={<img src={card.eye} alt="view details" />}
+                image={<img src={card.image} alt={card.title} />}
                 title={card.title}
                 newPrice={card.newPrice}
                 oldPrice={card.oldPrice}
-                star={card.star}
+                star={<img src={card.star} alt="ratings" />}
                 num={card.num}
                 btn={card.btn}
-                // onButtonClick={() => handleAddToCart(card.id)}
+                onEyeClick={() => handleClick(card)}
+                onButtonClick={() => handleAddToCart(card)}
               />
             </div>
           ))}

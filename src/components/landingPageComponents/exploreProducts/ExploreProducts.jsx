@@ -16,6 +16,7 @@ import eop5 from "../../../assets/images/eop5.svg";
 import eop6 from "../../../assets/images/eop6.svg";
 import eop7 from "../../../assets/images/eop7.svg";
 import eop8 from "../../../assets/images/eop8.svg";
+import trash from "../../../assets/images/trash.svg";
 import fillEye from "../../../assets/images/fillEye.svg";
 import fillHeart from "../../../assets/images/fillHeart.svg";
 import colourChange1 from "../../../assets/images/colourChange1.svg";
@@ -202,7 +203,7 @@ const ExploreProducts = () => {
                 trash={
                   isWishlisted ? (
                     <span onClick={() => handleWishlistToggle(product)}>
-                      <img src={product.heart} alt="trash Icon" />
+                      <img src={product.trash} alt="trash Icon" />
                     </span>
                   ) : null
                 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./productDetails.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { clearSelectedProduct } from "../../store/productSlice";
+import { setSelectedProduct, clearSelectedProduct, addToWishlist, removeFromWishlist } from "../../store/productSlice";
 import { useNavigate, Link } from "react-router-dom";
 import { addToCart } from "../../store/inventorySlice";
 import colourChange4 from "../../assets/images/colourChange4.svg";
@@ -27,7 +27,8 @@ const productList = [
   {
     id: 1,
     text: "-40%",
-    
+    eye: fillEye,
+    heart: fillHeart,
     image: hp1,
     title: "HAVIT HV-G92 Gamepad",
     newPrice: "$120",
@@ -35,10 +36,13 @@ const productList = [
     star: FiveStar,
     num: "(88)",
     description:
-      "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+    "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
   },
   {
     id: 2,
+    text: "-35%",
+    eye: fillEye,
+    heart: fillHeart,
     image: hp2,
     title: "AK-900 Wired Keyboard",
     newPrice: "$960",
@@ -47,10 +51,13 @@ const productList = [
     num: "(75)",
     btn: "Add To Cart",
     description:
-      "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+    "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
   },
   {
     id: 3,
+    text: "-30%",
+    eye: fillEye,
+    heart: fillHeart,
     image: hp3,
     title: "IPS LCD Gaming Monitor",
     newPrice: "$370",
@@ -58,10 +65,12 @@ const productList = [
     star: FiveStar,
     num: "(99)",
     description:
-      "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+    "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
   },
   {
     id: 4,
+    eye: fillEye,
+    heart: fillHeart,
     image: bsp3,
     title: "RGB liquid CPU Cooler",
     newPrice: "$375",
@@ -69,13 +78,14 @@ const productList = [
     star: FourHalfStar,
     num: "(99)",
     description:
-      "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+    "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
   },
 ];
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const wishlist = useSelector((state) => state.product.wishlist);
 
     // Get the selected product from Redux state
     const product = useSelector((state) => state.product.selectedProduct);
@@ -106,6 +116,24 @@ const ProductDetails = () => {
     dispatch(addToCart(formattedProduct));
     navigate("/scart");
 };
+
+ // Handle view items in product details
+  const handleClick = (card) => {
+    dispatch(setSelectedProduct(card));
+    navigate(`/product/${card.id}`);
+  };
+
+    // Handle add to wishlist
+    const isInWishlist = (productId) => wishlist.some((item) => item.id === productId);
+    
+    const handleWishlistToggle = (product) => {
+      if (isInWishlist(product.id)) {
+        dispatch(removeFromWishlist(product.id));
+      } else {
+        dispatch(addToWishlist(product));
+        navigate("/wishlist");
+      }
+    };
 
 
   return (
@@ -212,20 +240,46 @@ const ProductDetails = () => {
       <div className="detailsBottom">
         <FlashSales img1={<img src={redRectangle} alt="icon" />} text1="Related Item" />
         <div className="cards">
-          {productList.map((card) => (
-            <div key={card.id}>
-              <Card
-                image={<img src={card.image} alt={card.title} />}
-                title={card.title}
-                newPrice={card.newPrice}
-                oldPrice={card.oldPrice}
-                star={<img src={card.star} alt={card.title} />}
-                num={card.num}
-                btn={card.btn}
-                onButtonClick={() => handleAddToCart(card)}
-              />
-            </div>
-          ))}
+          {productList.map((card) => {
+            const isWishlisted = isInWishlist(card.id);
+
+            return (
+              <div key={card.id}>
+                <Card
+                  text={card.text}
+                  eye={<img src={card.eye} alt="view in details" />}
+                  heart={
+                    !isWishlisted ? (
+                      <img
+                        src={card.heart}
+                        alt="Add to wishlist"
+                        onClick={() => handleWishlistToggle(card)}
+                      />
+                    ) : null
+                  }
+                  trash={
+                    isWishlisted ? (
+                      <span onClick={() => handleWishlistToggle(card)}>
+                        <img
+                          src={card.heart}
+                          alt="trash Icon"
+                        />
+                      </span>
+                    ) : null
+                  }
+                  image={<img src={card.image} alt={card.title} />}
+                  title={card.title}
+                  newPrice={card.newPrice}
+                  oldPrice={card.oldPrice}
+                  star={<img src={card.star} alt={card.title} />}
+                  num={card.num}
+                  btn={card.btn}
+                  onButtonClick={() => handleAddToCart(card)}
+                  onEyeClick={() => handleClick(card)}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
